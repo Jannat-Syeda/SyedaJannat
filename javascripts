@@ -1,0 +1,47 @@
+// Set current year in footer
+const yearSpan = document.getElementById("year");
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
+}
+
+// Scroll to contact section when "Contact Me" button is clicked
+const contactBtn = document.getElementById("contactBtn");
+const contactSection = document.getElementById("contact");
+
+if (contactBtn && contactSection) {
+  contactBtn.addEventListener("click", () => {
+    contactSection.scrollIntoView({ behavior: "smooth" });
+  });
+}
+
+// Simple form validation + fake submit
+const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !message) {
+      formStatus.textContent = "Please fill in all required fields.";
+      formStatus.style.color = "#f97373";
+      return;
+    }
+
+    // Very basic email check
+    if (!email.includes("@") || !email.includes(".")) {
+      formStatus.textContent = "Please enter a valid email address.";
+      formStatus.style.color = "#f97373";
+      return;
+    }
+
+    formStatus.textContent = "Thank you! Your message has been recorded (demo only).";
+    formStatus.style.color = "#4ade80";
+
+    contactForm.reset();
+  });
+}
